@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import {useState} from 'react'
+import {useSignup} from "../hooks/useSignup";
+
 
 export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const {error, signUp} = useSignup()
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(email, password)
+    // console.log(email, password)
+    signUp(email,password)
   }
-  
+
   return (
     <div>
       <h2>Signup</h2>
@@ -32,6 +35,7 @@ export default function Signup() {
           />
         </label>
         <button>sign up</button>
+        {error && <p style={{color:"red"}}>{error}</p>}
       </form>
     </div>
   )
